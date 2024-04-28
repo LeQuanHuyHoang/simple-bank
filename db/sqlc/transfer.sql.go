@@ -13,42 +13,45 @@ import (
 
 const createTransfer = `-- name: CreateTransfer :one
 INSERT INTO transfers (
-    id,
     from_account_id,
     to_account_id,
     amount
 ) VALUES (
- $1, $2, $3, $4
-) RETURNING id, from_account_id, to_account_id, amount, create_at
+ $1, $2, $3
+) RETURNING id, from_account_id, to_account_id, amount, created_at
 `
 
 type CreateTransferParams struct {
-	ID            uuid.UUID `json:"id"`
 	FromAccountID uuid.UUID `json:"from_account_id"`
 	ToAccountID   uuid.UUID `json:"to_account_id"`
 	Amount        int64     `json:"amount"`
 }
 
 func (q *Queries) CreateTransfer(ctx context.Context, arg CreateTransferParams) (Transfer, error) {
-	row := q.db.QueryRowContext(ctx, createTransfer,
-		arg.ID,
-		arg.FromAccountID,
-		arg.ToAccountID,
-		arg.Amount,
-	)
+	row := q.db.QueryRowContext(ctx, createTransfer, arg.FromAccountID, arg.ToAccountID, arg.Amount)
 	var i Transfer
 	err := row.Scan(
 		&i.ID,
 		&i.FromAccountID,
 		&i.ToAccountID,
 		&i.Amount,
-		&i.CreateAt,
+		&i.CreatedAt,
 	)
 	return i, err
 }
 
+const deleteTransfer = `-- name: DeleteTransfer :exec
+DELETE FROM transfers
+WHERE id = $1
+`
+
+func (q *Queries) DeleteTransfer(ctx context.Context, id uuid.UUID) error {
+	_, err := q.db.ExecContext(ctx, deleteTransfer, id)
+	return err
+}
+
 const getTransfer = `-- name: GetTransfer :one
-SELECT id, from_account_id, to_account_id, amount, create_at FROM transfers
+SELECT id, from_account_id, to_account_id, amount, created_at FROM transfers
 WHERE id = $1 LIMIT 1
 `
 
@@ -60,13 +63,13 @@ func (q *Queries) GetTransfer(ctx context.Context, id uuid.UUID) (Transfer, erro
 		&i.FromAccountID,
 		&i.ToAccountID,
 		&i.Amount,
-		&i.CreateAt,
+		&i.CreatedAt,
 	)
 	return i, err
 }
 
 const listTransfer = `-- name: ListTransfer :many
-SELECT id, from_account_id, to_account_id, amount, create_at FROM transfers
+SELECT id, from_account_id, to_account_id, amount, created_at FROM transfers
 WHERE from_account_id = $1 OR
       to_account_id = $2
 ORDER BY id
@@ -100,7 +103,7 @@ func (q *Queries) ListTransfer(ctx context.Context, arg ListTransferParams) ([]T
 			&i.FromAccountID,
 			&i.ToAccountID,
 			&i.Amount,
-			&i.CreateAt,
+			&i.CreatedAt,
 		); err != nil {
 			return nil, err
 		}

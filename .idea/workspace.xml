@@ -5,13 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe12b80-3ce4-4d4f-8fee-f2a6a33c17c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/db/query/account.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/query/transfer.sql" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db/sqlc/account_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/sqlc/entry_test.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db/sqlc/main_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sqlc.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/sqlc/transfer_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/random.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migration/000001_init_schema.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/migration/000001_init_schema.down.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/migration/000001_init_schema.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/migration/000001_init_schema.up.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/query/account.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/query/account.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/query/transfer.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/query/transfer.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sqlc/account.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/account.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sqlc/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/models.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sqlc/transfer.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/transfer.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sqlc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/sqlc.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,16 +69,73 @@
       <recent name="C:\Wieee\Work\simple-bank\db" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="postgres" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/db/migration/Makefile" target="postgres" workingDirectory="" arguments="">
-        <envs />
-      </makefile>
+  <component name="RunManager" selected="Go Test.go test simple-bank/db/sqlc">
+    <configuration name="TestDeleteAccount in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="simple-bank" />
+      <working_directory value="$PROJECT_DIR$/db/sqlc" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="simple-bank/db/sqlc" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestDeleteAccount\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGetAccount in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="simple-bank" />
+      <working_directory value="$PROJECT_DIR$/db/sqlc" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="simple-bank/db/sqlc" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGetAccount\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestListAccounts in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="simple-bank" />
+      <working_directory value="$PROJECT_DIR$/db/sqlc" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="simple-bank/db/sqlc" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestListAccounts\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestUpdateAccount in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="simple-bank" />
+      <working_directory value="$PROJECT_DIR$/db/sqlc" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="simple-bank/db/sqlc" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestUpdateAccount\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="simple-bank" />
+      <working_directory value="$PROJECT_DIR$/db/sqlc" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="simple-bank/db/sqlc" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Makefile Target.postgres" />
+        <item itemvalue="Go Test.go test simple-bank/db/sqlc" />
+        <item itemvalue="Go Test.TestListAccounts in simple-bank/db/sqlc" />
+        <item itemvalue="Go Test.TestDeleteAccount in simple-bank/db/sqlc" />
+        <item itemvalue="Go Test.TestUpdateAccount in simple-bank/db/sqlc" />
+        <item itemvalue="Go Test.TestGetAccount in simple-bank/db/sqlc" />
       </list>
     </recent_temporary>
   </component>
@@ -91,5 +156,16 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/db/sqlc/main_test.go</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

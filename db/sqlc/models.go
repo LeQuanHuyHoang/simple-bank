@@ -30,5 +30,5 @@ type Transfer struct {
 	FromAccountID uuid.UUID `json:"from_account_id"`
 	ToAccountID   uuid.UUID `json:"to_account_id"`
 	Amount        int64     `json:"amount"`
-	CreateAt      time.Time `json:"create_at"`
+	CreatedAt     time.Time `json:"created_at"`
 }
