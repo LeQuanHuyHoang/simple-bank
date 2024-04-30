@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="bbe12b80-3ce4-4d4f-8fee-f2a6a33c17c2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
     </list>
+=======
+    <list default="true" id="bbe12b80-3ce4-4d4f-8fee-f2a6a33c17c2" name="Changes" comment="" />
+>>>>>>> 8fbe130 (init CI workflows)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
