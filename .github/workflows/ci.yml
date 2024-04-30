@@ -19,7 +19,7 @@ jobs:
         image: postgres:latest
         # Provide the password for postgres
         env:
-          POSTGRES_NAME: root
+          POSTGRES_USER: root
           POSTGRES_PASSWORD: secret
           POSTGRES_DB: simple_bank
         # Set health checks to wait until postgres has started
