@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe12b80-3ce4-4d4f-8fee-f2a6a33c17c2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/db/sqlc/entry_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/sqlc/store.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db/sqlc/store_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/common.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/sqlc/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/main_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/query/account.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/query/account.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sqlc/account.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/account.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sqlc/store.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/store.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sqlc/store_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/store_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
       <pattern value="^\QTestCreateEntry\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestDeleteAccount in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestTransferTx in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="simple-bank" />
       <working_directory value="$PROJECT_DIR$/db/sqlc" />
       <root_directory value="$PROJECT_DIR$" />
@@ -81,10 +82,10 @@
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestDeleteAccount\E$" />
+      <pattern value="^\QTestTransferTx\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestListAccounts in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestTransferTxDeadLock in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="simple-bank" />
       <working_directory value="$PROJECT_DIR$/db/sqlc" />
       <root_directory value="$PROJECT_DIR$" />
@@ -93,7 +94,7 @@
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestListAccounts\E$" />
+      <pattern value="^\QTestTransferTxDeadLock\E$" />
       <method v="2" />
     </configuration>
     <configuration name="go test simple-bank/db/sqlc (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -121,10 +122,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Go Test.go test simple-bank/db/sqlc (1)" />
+        <item itemvalue="Go Test.TestTransferTx in simple-bank/db/sqlc" />
+        <item itemvalue="Go Test.TestTransferTxDeadLock in simple-bank/db/sqlc" />
         <item itemvalue="Go Test.TestCreateEntry in simple-bank/db/sqlc" />
         <item itemvalue="Go Test.go test simple-bank/db/sqlc" />
-        <item itemvalue="Go Test.TestListAccounts in simple-bank/db/sqlc" />
-        <item itemvalue="Go Test.TestDeleteAccount in simple-bank/db/sqlc" />
       </list>
     </recent_temporary>
   </component>
