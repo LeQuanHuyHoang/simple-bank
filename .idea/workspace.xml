@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bbe12b80-3ce4-4d4f-8fee-f2a6a33c17c2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/wordflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/wordflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

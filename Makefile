@@ -18,7 +18,7 @@ sqlc:
 	docker run --rm -v $(PWD):/src -w /src sqlc/sqlc generate
 
 test:
-	go test -cover -v ./db/sqlc
+	go test -cover -v ./..
 
 
 .PHONY: postgres created migrateup
