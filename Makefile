@@ -21,4 +21,7 @@ test:
 	go test -cover -v ./db/sqlc
 
 
+server:
+	go run main.go
+
 .PHONY: postgres created migrateup
