@@ -10,7 +10,7 @@ import (
 
 type createAccountRequest struct {
 	Owner    string `json:"owner" binding:"required"`
-	Currency string `json:"currency" binding:"required,oneof=USD EUR"`
+	Currency string `json:"currency" binding:"required,currency"`
 }
 
 type ListAccountsParams struct {
@@ -19,7 +19,7 @@ type ListAccountsParams struct {
 }
 
 type GetAccountParams struct {
-	ID string `uri:"id" binding:"required"`
+	ID string `uri:"id" binding:"required,uuid"`
 }
 
 type AddAccountBalanceParams struct {
@@ -28,7 +28,7 @@ type AddAccountBalanceParams struct {
 }
 
 type DeleteAccountParams struct {
-	ID string `json:"id" binding:"required"`
+	ID string `json:"id" binding:"required,uuid"`
 }
 
 func (s *Server) createAccount(ctx *gin.Context) {

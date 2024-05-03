@@ -20,8 +20,11 @@ sqlc:
 test:
 	go test -cover -v ./db/sqlc
 
-
 server:
 	go run main.go
+
+mock:
+	mockgen -package mockdb -destination db/mock/store.go simple-bank/db/sqlc Store
+
 
 .PHONY: postgres created migrateup
