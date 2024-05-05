@@ -6,14 +6,14 @@ CREATE TABLE "accounts" (
                             "owner" varchar NOT NULL,
                             "balance" bigint NOT NULL,
                             "currency" varchar NOT NULL,
-                            "created_at" timestamp NOT NULL DEFAULT (now())
+                            "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
 CREATE TABLE "entries" (
                            "id" uuid PRIMARY KEY DEFAULT (uuid_generate_v4()),
                            "account_id" uuid NOT NULL,
                            "amount" bigint NOT NULL,
-                           "created_at" timestamp NOT NULL DEFAULT (now())
+                           "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
 CREATE TABLE "transfers" (
@@ -21,7 +21,7 @@ CREATE TABLE "transfers" (
                              "from_account_id" uuid NOT NULL,
                              "to_account_id" uuid NOT NULL,
                              "amount" bigint NOT NULL,
-                             "created_at" timestamp NOT NULL DEFAULT (now())
+                             "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
 CREATE INDEX ON "accounts" ("owner");
