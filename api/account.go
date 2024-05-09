@@ -32,7 +32,7 @@ type DeleteAccountParams struct {
 	ID string `json:"id" binding:"required,uuid"`
 }
 
-func (s *Server) createAccount(ctx *gin.Context) {
+func (server *Server) createAccount(ctx *gin.Context) {
 	var req createAccountRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
@@ -45,7 +45,7 @@ func (s *Server) createAccount(ctx *gin.Context) {
 		Balance:  0,
 	}
 
-	account, err := s.store.CreateAccount(ctx, args)
+	account, err := server.store.CreateAccount(ctx, args)
 	if err != nil {
 		if pqErr, ok := err.(*pq.Error); ok {
 			switch pqErr.Code.Name() {
@@ -61,7 +61,7 @@ func (s *Server) createAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-func (s *Server) listAccount(ctx *gin.Context) {
+func (server *Server) listAccount(ctx *gin.Context) {
 	var req ListAccountsParams
 	if err := ctx.ShouldBindQuery(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
@@ -73,7 +73,7 @@ func (s *Server) listAccount(ctx *gin.Context) {
 		Offset: req.PageID,
 	}
 
-	account, err := s.store.ListAccounts(ctx, args)
+	account, err := server.store.ListAccounts(ctx, args)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
 		return
@@ -82,13 +82,13 @@ func (s *Server) listAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-func (s *Server) getAccount(ctx *gin.Context) {
+func (server *Server) getAccount(ctx *gin.Context) {
 	var req GetAccountParams
 	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
 		return
 	}
-	account, err := s.store.GetAccount(ctx, uuid.MustParse(req.ID))
+	account, err := server.store.GetAccount(ctx, uuid.MustParse(req.ID))
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errResponse(err))
@@ -100,7 +100,7 @@ func (s *Server) getAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-func (s *Server) addAccountBalance(ctx *gin.Context) {
+func (server *Server) addAccountBalance(ctx *gin.Context) {
 	var req AddAccountBalanceParams
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
@@ -112,7 +112,7 @@ func (s *Server) addAccountBalance(ctx *gin.Context) {
 		ID:     uuid.MustParse(req.ID),
 	}
 
-	account, err := s.store.AddAccountBalance(ctx, args)
+	account, err := server.store.AddAccountBalance(ctx, args)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
 		return
@@ -121,14 +121,14 @@ func (s *Server) addAccountBalance(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-func (s *Server) deleteAccount(ctx *gin.Context) {
+func (server *Server) deleteAccount(ctx *gin.Context) {
 	var req DeleteAccountParams
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
 		return
 	}
 
-	err := s.store.DeleteAccount(ctx, uuid.MustParse(req.ID))
+	err := server.store.DeleteAccount(ctx, uuid.MustParse(req.ID))
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
 		return
