@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc3de830-3b27-4317-8489-9ccb991af905" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/api/middleware.go" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/api/middleware_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/account.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/account.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/account_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/account_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/server.go" afterDir="false" />
