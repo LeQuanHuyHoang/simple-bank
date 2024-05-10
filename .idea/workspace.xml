@@ -5,22 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc3de830-3b27-4317-8489-9ccb991af905" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/token/paseto_maker.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/token/paseto_maker_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/middleware_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/account.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/account.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/account_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/account_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/main_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/transfer.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/transfer.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/transfer_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/transfer_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/user_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/user_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.env" beforeDir="false" afterPath="$PROJECT_DIR$/app.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/query/account.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/query/account.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sqlc/account.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/account.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/sqlc/account_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/db/sqlc/account_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/config.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +60,8 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/HP&quot;
   }
 }</component>
-  <component name="RunManager" selected="Go Test.go test simple-bank/api">
-    <configuration name="TestCreateAccountAPI in simple-bank/api" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.TestTransfer in simple-bank/api">
+    <configuration name="TestAuthMiddleware in simple-bank/api" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="simple-bank" />
       <working_directory value="$PROJECT_DIR$/api" />
       <root_directory value="$PROJECT_DIR$" />
@@ -72,10 +70,10 @@
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestCreateAccountAPI\E$" />
+      <pattern value="^\QTestAuthMiddleware\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestCreateUser in simple-bank/api" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGetAccountAPI in simple-bank/api" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="simple-bank" />
       <working_directory value="$PROJECT_DIR$/api" />
       <root_directory value="$PROJECT_DIR$" />
@@ -84,31 +82,31 @@
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestCreateUser\E$" />
+      <pattern value="^\QTestGetAccountAPI\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestExpiredPasetoToken in simple-bank/token" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestListAccounts in simple-bank/db/sqlc" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="simple-bank" />
-      <working_directory value="$PROJECT_DIR$/token" />
+      <working_directory value="$PROJECT_DIR$/db/sqlc" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="simple-bank/token" />
+      <package value="simple-bank/db/sqlc" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestExpiredPasetoToken\E$" />
+      <pattern value="^\QTestListAccounts\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestPasetoMaker in simple-bank/token" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestTransfer in simple-bank/api" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="simple-bank" />
-      <working_directory value="$PROJECT_DIR$/token" />
+      <working_directory value="$PROJECT_DIR$/api" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="simple-bank/token" />
+      <package value="simple-bank/api" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestPasetoMaker\E$" />
+      <pattern value="^\QTestTransfer\E$" />
       <method v="2" />
     </configuration>
     <configuration name="go test simple-bank/api" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -124,11 +122,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestTransfer in simple-bank/api" />
         <item itemvalue="Go Test.go test simple-bank/api" />
-        <item itemvalue="Go Test.TestExpiredPasetoToken in simple-bank/token" />
-        <item itemvalue="Go Test.TestPasetoMaker in simple-bank/token" />
-        <item itemvalue="Go Test.TestCreateUser in simple-bank/api" />
-        <item itemvalue="Go Test.TestCreateAccountAPI in simple-bank/api" />
+        <item itemvalue="Go Test.TestGetAccountAPI in simple-bank/api" />
+        <item itemvalue="Go Test.TestListAccounts in simple-bank/db/sqlc" />
+        <item itemvalue="Go Test.TestAuthMiddleware in simple-bank/api" />
       </list>
     </recent_temporary>
   </component>

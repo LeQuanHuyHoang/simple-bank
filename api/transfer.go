@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/pkg/errors"
 	"net/http"
 	db "simple-bank/db/sqlc"
+	"simple-bank/token"
 )
 
 type transferRequest struct {
@@ -23,10 +25,19 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 		return
 	}
 
-	if !server.validAccount(ctx, uuid.MustParse(req.FromAccountID), req.Currency) {
+	fromAccount, valid := server.validAccount(ctx, uuid.MustParse(req.FromAccountID), req.Currency)
+	if !valid {
 		return
 	}
-	if !server.validAccount(ctx, uuid.MustParse(req.ToAccountID), req.Currency) {
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	if fromAccount.Owner != authPayload.Username {
+		err := errors.New("fromAccount doesn't belong to the authenticated user")
+		ctx.JSON(http.StatusUnauthorized, errResponse(err))
+		return
+	}
+
+	_, valid = server.validAccount(ctx, uuid.MustParse(req.ToAccountID), req.Currency)
+	if !valid {
 		return
 	}
 
@@ -45,22 +56,22 @@ func (server *Server) createTransfer(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-func (server *Server) validAccount(ctx *gin.Context, accountID uuid.UUID, currency string) bool {
+func (server *Server) validAccount(ctx *gin.Context, accountID uuid.UUID, currency string) (db.Account, bool) {
 	account, err := server.store.GetAccount(ctx, accountID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errResponse(err))
-			return false
+			return account, false
 		}
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
-		return false
+		return account, false
 	}
 
 	if account.Currency != currency {
 		err := fmt.Errorf("accout [%d] currency mismatch: %s vs %s", account.ID, account.Currency, currency)
 		ctx.JSON(http.StatusBadRequest, errResponse(err))
-		return false
+		return account, false
 	}
-	return true
+	return account, true
 
 }
