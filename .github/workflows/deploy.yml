@@ -6,11 +6,12 @@ on:
 
 jobs:
   build:
-    name: Build image
-    runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
+
+    name: Build image
+    runs-on: ubuntu-latest
 
     steps:
     - name: Check out code
