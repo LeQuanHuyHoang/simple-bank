@@ -47,7 +47,10 @@ jobs:
     - name: Update kube config
       run: |
         aws eks update-kubeconfig --name simple-bank --region ap-southeast-1
-        aws configure get region --profile github-actions-role
+        aws configure set varname value [--profile github]
+        aws configure set aws_access_key_id AKIA3AXVL2FTOXG7EJSH --profile github
+        aws configure set aws_secret_access_key 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 --profile github
+
     - name: Deploy image to Amazon ECR
       run: |
         kubectl config current-context
