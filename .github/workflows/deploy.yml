@@ -38,19 +38,12 @@ jobs:
          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -t latest .
          docker push -a $REGISTRY/$REPOSITORY
 
-    - name: deploy to cluster
-      uses: steebchen/kubectl@v2.0.0
-      with: # defaults to latest kubectl binary version
-        config: ${{ secrets.KUBE_CONFIG_DATA }}
-        command: set image --record deployment/simple-bank container=${{ github.repository }}:latest
-
-    - name: verify deployment
-      uses: steebchen/kubectl@v2.0.0
+    - name: config eks
+      uses: actions-hub/kubectl@master
+      env:
+        KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
       with:
-        config: ${{ secrets.KUBE_CONFIG_DATA }}
-        version: v1.21.0 # specify kubectl binary version explicitly
-        binaries-url: "https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl" # specify the download url explicitly
-        command: rollout status deployment/simple-bank
+        args: get pods
 
     - name: Update kube config
       run: | 
