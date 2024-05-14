@@ -48,9 +48,10 @@ jobs:
       run: |
         aws eks update-kubeconfig --name simple-bank --region ap-southeast-1
         aws configure set varname value --profile github
-        aws configure set aws_access_key_id AKIA3AXVL2FTOXG7EJSH --profile github
-        aws configure set aws_secret_access_key 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 --profile github
-
+        aws configure set aws_access_key_id AKIA3AXVL2FTGD52UBRZ --profile github
+        aws configure set aws_secret_access_key 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 --profile github
+        aws configure get aws_access_key_id --profile github
+        aws configure get aws_secret_access_key --profile github
     - name: Deploy image to Amazon ECR
       run: |
         kubectl config current-context
