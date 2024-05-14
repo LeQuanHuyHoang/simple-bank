@@ -49,6 +49,7 @@ jobs:
 
     - name: Deploy image to Amazon ECR
       run: |
+        kubectl config current-context
         kubectl apply -f eks/aws-auth.yaml
         kubectl apply -f eks/deployment.yaml
         kubectl apply -f eks/service.yaml
