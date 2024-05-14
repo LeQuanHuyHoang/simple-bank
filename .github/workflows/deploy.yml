@@ -49,7 +49,7 @@ jobs:
         aws eks update-kubeconfig --name simple-bank --region ap-southeast-1
         aws configure set aws_access_key_id AKIA3AXVL2FTGD52UBRZ --profile default
         aws configure set aws_secret_access_key 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 --profile default
-        aws configure list-profiles
+        aws configure list
         kubectl get pods
 
     - name: Deploy image to Amazon ECR
