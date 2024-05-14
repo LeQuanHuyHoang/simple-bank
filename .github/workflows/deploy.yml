@@ -50,8 +50,9 @@ jobs:
         aws configure set varname value --profile github
         aws configure set aws_access_key_id AKIA3AXVL2FTGD52UBRZ --profile github
         aws configure set aws_secret_access_key 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 --profile github
-        aws configure get aws_access_key_id --profile github
-        aws configure get aws_secret_access_key --profile github
+        aws configure get  --profile github
+        kubectl get pods
+
     - name: Deploy image to Amazon ECR
       run: |
         kubectl config current-context
