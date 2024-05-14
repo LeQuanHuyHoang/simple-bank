@@ -16,12 +16,6 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
 
-    - name: Install kubectl
-      uses: azure/setup-kubectl@v3
-      with:
-        version: 'v1.25.2' # default is latest stable
-      id: install
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -44,10 +38,23 @@ jobs:
          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -t latest .
          docker push -a $REGISTRY/$REPOSITORY
 
+    - name: deploy to cluster
+      uses: steebchen/kubectl@v2.0.0
+      with: # defaults to latest kubectl binary version
+        config: ${{ secrets.KUBE_CONFIG_DATA }}
+        command: set image --record deployment/simple-bank container=${{ github.repository }}:${{ github.sha }}
+
+    - name: verify deployment
+      uses: steebchen/kubectl@v2.0.0
+      with:
+        config: ${{ secrets.KUBE_CONFIG_DATA }}
+        version: v1.21.0 # specify kubectl binary version explicitly
+        binaries-url: "https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl" # specify the download url explicitly
+        command: rollout status deployment/simple-bank
+
     - name: Update kube config
       run: | 
         aws eks update-kubeconfig --name simple-bank --region ap-southeast-1
-        cat ~/.aws/credentials
 
     - name: Deploy image to Amazon ECR
       run: |
