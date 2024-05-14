@@ -8,7 +8,8 @@ data:
     - rolearn: arn:aws:iam::757502562662:role/github-actions-role
     username: github-actions-role
     groups:
-        - system:masters
+        - system:bootstrappers
+        - system:nodes
   mapUsers: |
     - userarn: arn:aws:iam::757502562662:user/github_ci
       username: github_ci
