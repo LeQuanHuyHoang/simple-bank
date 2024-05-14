@@ -49,7 +49,9 @@ jobs:
 
     - name: Deploy image to Amazon ECR
       run: |
-        kubectl config current-context
-        kubectl apply --validate=false -f eks/aws-auth.yaml 
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+        kubectl apply -f eks/aws-auth.yaml
         kubectl apply -f eks/deployment.yaml
         kubectl apply -f eks/service.yaml
