@@ -47,7 +47,7 @@ jobs:
     - name: Update kube config
       run: |
         aws eks update-kubeconfig --name simple-bank --region ap-southeast-1
-        kubectl cluster-info
+        aws configure get region --profile get region --profile github-actions-role
     - name: Deploy image to Amazon ECR
       run: |
         kubectl config current-context
