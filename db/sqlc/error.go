@@ -2,6 +2,7 @@ package db
 
 import (
 	"errors"
+	"fmt"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 )
@@ -11,7 +12,7 @@ const (
 	UniqueViolation     = "23505"
 )
 
-var ErrRecordNotFound = pgx.ErrNoRows
+var ErrRecordNotFound = errors.New(fmt.Sprint("sql: ", pgx.ErrNoRows))
 
 var ErrUniqueViolation = &pgconn.PgError{
 	Code: UniqueViolation,
