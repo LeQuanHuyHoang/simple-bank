@@ -21,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	SimpleBank_CreateUser_FullMethodName = "/pb.SimpleBank/CreateUser"
 	SimpleBank_LoginUser_FullMethodName  = "/pb.SimpleBank/LoginUser"
-	SimpleBank_UpdateUser_FullMethodName = "/pb.SimpleBank/updateUser"
+	SimpleBank_UpdateUser_FullMethodName = "/pb.SimpleBank/UpdateUser"
 )
 
 // SimpleBankClient is the client API for SimpleBank service.
@@ -174,7 +174,7 @@ var SimpleBank_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SimpleBank_LoginUser_Handler,
 		},
 		{
-			MethodName: "updateUser",
+			MethodName: "UpdateUser",
 			Handler:    _SimpleBank_UpdateUser_Handler,
 		},
 	},

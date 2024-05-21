@@ -82,7 +82,7 @@
     },
     "/v1/update_user": {
       "post": {
-        "operationId": "SimpleBank_updateUser",
+        "operationId": "SimpleBank_UpdateUser",
         "responses": {
           "200": {
             "description": "A successful response.",

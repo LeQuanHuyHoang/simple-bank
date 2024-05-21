@@ -3,7 +3,6 @@ package gapi
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -67,8 +66,6 @@ func (server *Server) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest)
 	rsq := &pb.UpdateUserResponse{
 		User: convertUser(user),
 	}
-	fmt.Println(user)
-
 	return rsq, nil
 }
 

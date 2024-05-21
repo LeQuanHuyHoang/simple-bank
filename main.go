@@ -8,12 +8,14 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	_ "github.com/lib/pq"
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/protobuf/encoding/protojson"
-	"log"
 	"net"
 	"net/http"
+	"os"
 	"simple-bank/api"
 	db "simple-bank/db/sqlc"
 	"simple-bank/gapi"
@@ -24,11 +26,16 @@ import (
 func main() {
 	config, err := utils.LoadConfig(".")
 	if err != nil {
-		log.Fatal("Cannot load config:", err)
+		log.Fatal().Err(err).Msg("Cannot load config")
 	}
+
+	if config.Environment == "development" {
+		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	}
+
 	conn, err := sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
-		log.Fatal("can't connect to database", err)
+		log.Fatal().Err(err).Msg("can't connect to database")
 	}
 
 	// run db migrations
@@ -42,44 +49,44 @@ func main() {
 func runDBMigration(migrationURL string, dbSource string) {
 	migration, err := migrate.New(migrationURL, dbSource)
 	if err != nil {
-		log.Fatal("cannot create migrate instance:", err)
+		log.Fatal().Err(err).Msg("cannot create migrate instance")
 
 	}
 
 	if err = migration.Up(); err != nil && err != migrate.ErrNoChange {
-		log.Fatal("failed to run migrate up:", err)
+		log.Fatal().Err(err).Msg("failed to run migrate up:")
 	}
 
-	log.Println("db migrated successfully")
+	log.Info().Msg("db migrated successfully")
 }
 
 func runGrpcServer(config utils.Config, store db.Store) {
 	server, err := gapi.NewServer(config, store)
 	if err != nil {
-		log.Fatal("can't create server", err)
+		log.Fatal().Err(err).Msg("can't create server")
 	}
 
-	grpc.UnaryInterceptor()
-	grpcServer := grpc.NewServer()
+	grpcLogger := grpc.UnaryInterceptor(gapi.GrpcLogger)
+	grpcServer := grpc.NewServer(grpcLogger)
 	pb.RegisterSimpleBankServer(grpcServer, server)
 	reflection.Register(grpcServer)
 
 	listener, err := net.Listen("tcp", config.GRPCServerAddress)
 	if err != nil {
-		log.Fatal("can't create listener", err)
+		log.Fatal().Err(err).Msg("can't create listener")
 	}
 
-	log.Printf("Start gRPC server at %s", listener.Addr().String())
+	log.Info().Msgf("Start gRPC server at %s", listener.Addr().String())
 	err = grpcServer.Serve(listener)
 	if err != nil {
-		log.Fatal("can't start gRPC server", err)
+		log.Fatal().Err(err).Msg("can't start gRPC server")
 	}
 }
 
 func runGatewayServer(config utils.Config, store db.Store) {
 	server, err := gapi.NewServer(config, store)
 	if err != nil {
-		log.Fatal("can't create server", err)
+		log.Fatal().Err(err).Msg("can't create server")
 	}
 	jsonOption := runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
 		MarshalOptions: protojson.MarshalOptions{
@@ -97,7 +104,7 @@ func runGatewayServer(config utils.Config, store db.Store) {
 
 	err = pb.RegisterSimpleBankHandlerServer(ctx, grpcMux, server)
 	if err != nil {
-		log.Fatal("can't register handler server", err)
+		log.Fatal().Err(err).Msg("can't register handler server")
 	}
 	// receive http request from client
 	mux := http.NewServeMux()
@@ -105,24 +112,24 @@ func runGatewayServer(config utils.Config, store db.Store) {
 
 	listener, err := net.Listen("tcp", config.HTTPServerAddress)
 	if err != nil {
-		log.Fatal("can't create listener", err)
+		log.Fatal().Err(err).Msg("can't create listener")
 	}
 
-	log.Printf("Start HTTP gateway at %s", listener.Addr().String())
+	log.Info().Msgf("Start HTTP gateway at %s", listener.Addr().String())
 	err = http.Serve(listener, mux)
 	if err != nil {
-		log.Fatal("can't start HTTP Gateway server", err)
+		log.Fatal().Err(err).Msg("can't start HTTP Gateway server")
 	}
 }
 
 func runGinServer(config utils.Config, store db.Store) {
 	server, err := api.NewServer(config, store)
 	if err != nil {
-		log.Fatal("can't create server", err)
+		log.Fatal().Err(err).Msg("can't create server")
 	}
 
 	err = server.Start(config.HTTPServerAddress)
 	if err != nil {
-		log.Fatal("can't start server", err)
+		log.Fatal().Err(err).Msg("can't start server")
 	}
 }
