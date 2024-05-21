@@ -59,6 +59,7 @@ func runGrpcServer(config utils.Config, store db.Store) {
 		log.Fatal("can't create server", err)
 	}
 
+	grpc.UnaryInterceptor()
 	grpcServer := grpc.NewServer()
 	pb.RegisterSimpleBankServer(grpcServer, server)
 	reflection.Register(grpcServer)

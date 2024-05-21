@@ -184,7 +184,6 @@ func TestLoginUserAPI(t *testing.T) {
 					Times(1)
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
-				fmt.Println(recorder)
 				require.Equal(t, http.StatusOK, recorder.Code)
 			},
 		},
