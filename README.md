@@ -1,4 +1,4 @@
-# SIMPLE-BANK
+ # SIMPLE-BANK
 ## Setup local development
 
 ### Install tools
