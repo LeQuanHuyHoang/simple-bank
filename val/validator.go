@@ -2,6 +2,7 @@ package val
 
 import (
 	"fmt"
+	"github.com/google/uuid"
 	"net/mail"
 	"regexp"
 )
@@ -52,4 +53,12 @@ func ValidateFullName(value string) error {
 		return fmt.Errorf("must contain only letters or spaces")
 	}
 	return nil
+}
+
+func ValidateEmailID(value string) error {
+	return uuid.Validate(value)
+}
+
+func ValidateSecretCode(value string) error {
+	return ValidateString(value, 32, 128)
 }

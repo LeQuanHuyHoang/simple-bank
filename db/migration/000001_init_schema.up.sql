@@ -1,4 +1,5 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 SET TIMEZONE='Asia/Ho_Chi_Minh';
 
 CREATE TABLE "accounts" (
