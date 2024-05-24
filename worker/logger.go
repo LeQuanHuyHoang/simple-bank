@@ -14,7 +14,7 @@ func NewLogger() *Logger {
 }
 
 func (logger *Logger) Print(level zerolog.Level, args ...interface{}) {
-	log.WithLevel(level).Msg(fmt.Sprint(args))
+	log.WithLevel(level).Msg(fmt.Sprint(args...))
 }
 
 func (logger *Logger) Printf(ctx context.Context, format string, v ...interface{}) {

@@ -22,13 +22,13 @@ migratedown1:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose down 1
 
 new_migration:
-	migrate create -ext sql -dir db/migration -seq <migration_name>
+	migrate create -ext sql -dir db/migration -seq $(name)
 
 sqlc:
 	docker run --rm -v $(PWD):/src -w /src sqlc/sqlc generate
 
 test:
-	go test -cover -v ./...
+	go test -cover -v -short ./...
 
 server:
 	go run main.go
