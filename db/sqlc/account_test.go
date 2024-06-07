@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 	"github.com/stretchr/testify/require"
 	"simple-bank/utils"
 	"testing"
@@ -17,7 +16,7 @@ func createRandomAccount(t *testing.T) Account {
 		Currency: utils.RandomCurrency(),
 	}
 
-	account, err := testQueries.CreateAccount(context.Background(), arg)
+	account, err := testStore.CreateAccount(context.Background(), arg)
 	require.NoError(t, err)
 	require.NotEmpty(t, account)
 
@@ -36,7 +35,7 @@ func TestCreateAccount(t *testing.T) {
 
 func TestGetAccount(t *testing.T) {
 	testAccount1 := createRandomAccount(t)
-	testAccount2, err := testQueries.GetAccount(context.Background(), testAccount1.ID)
+	testAccount2, err := testStore.GetAccount(context.Background(), testAccount1.ID)
 	require.NoError(t, err)
 	require.NotEmpty(t, testAccount2)
 
@@ -56,7 +55,7 @@ func TestUpdateAccount(t *testing.T) {
 		Balance: utils.RandomMoney(),
 	}
 
-	testAccount2, err := testQueries.UpdateAccount(context.Background(), arg)
+	testAccount2, err := testStore.UpdateAccount(context.Background(), arg)
 	require.NoError(t, err)
 	require.NotEmpty(t, testAccount2)
 
@@ -70,12 +69,12 @@ func TestUpdateAccount(t *testing.T) {
 
 func TestDeleteAccount(t *testing.T) {
 	testAccount1 := createRandomAccount(t)
-	err := testQueries.DeleteAccount(context.Background(), testAccount1.ID)
+	err := testStore.DeleteAccount(context.Background(), testAccount1.ID)
 	require.NoError(t, err)
 
-	testAccount2, err := testQueries.GetAccount(context.Background(), testAccount1.ID)
+	testAccount2, err := testStore.GetAccount(context.Background(), testAccount1.ID)
 	require.Error(t, err)
-	require.EqualError(t, err, sql.ErrNoRows.Error())
+	require.EqualError(t, err, ErrRecordNotFound.Error())
 	require.Empty(t, testAccount2)
 }
 
@@ -91,7 +90,7 @@ func TestListAccounts(t *testing.T) {
 		Offset: 0,
 	}
 
-	accounts, err := testQueries.ListAccounts(context.Background(), arg)
+	accounts, err := testStore.ListAccounts(context.Background(), arg)
 	require.NoError(t, err)
 	require.NotEmpty(t, accounts)
 

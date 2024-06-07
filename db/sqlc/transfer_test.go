@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 	"github.com/stretchr/testify/require"
 	"simple-bank/utils"
 	"testing"
@@ -19,7 +18,7 @@ func createRandomTransfer(t *testing.T) Transfer {
 		Amount:        utils.RandomMoney(),
 	}
 
-	testTransfer, err := testQueries.CreateTransfer(context.Background(), arg)
+	testTransfer, err := testStore.CreateTransfer(context.Background(), arg)
 	require.NoError(t, err)
 	require.NotEmpty(t, testTransfer)
 
@@ -38,7 +37,7 @@ func TestCreateTransfer(t *testing.T) {
 
 func TestGetTransfer(t *testing.T) {
 	testTransfer1 := createRandomTransfer(t)
-	testTransfer2, err := testQueries.GetTransfer(context.Background(), testTransfer1.ID)
+	testTransfer2, err := testStore.GetTransfer(context.Background(), testTransfer1.ID)
 	require.NoError(t, err)
 	require.NotEmpty(t, testTransfer2)
 
@@ -51,12 +50,12 @@ func TestGetTransfer(t *testing.T) {
 
 func TestDeleteTransfer(t *testing.T) {
 	testTransfer1 := createRandomTransfer(t)
-	err := testQueries.DeleteAccount(context.Background(), testTransfer1.ID)
+	err := testStore.DeleteAccount(context.Background(), testTransfer1.ID)
 	require.NoError(t, err)
 
-	testTransfer2, err := testQueries.GetAccount(context.Background(), testTransfer1.ID)
+	testTransfer2, err := testStore.GetAccount(context.Background(), testTransfer1.ID)
 	require.Error(t, err)
-	require.EqualError(t, err, sql.ErrNoRows.Error())
+	require.EqualError(t, err, ErrRecordNotFound.Error())
 	require.Empty(t, testTransfer2)
 }
 
@@ -70,7 +69,7 @@ func TestDeleteTransfer(t *testing.T) {
 //		Offset: 5,
 //	}
 //
-//	transfers, err := testQueries.ListTransfer(context.Background(), arg)
+//	transfers, err := testStore.ListTransfer(context.Background(), arg)
 //	require.NoError(t, err)
 //	require.Len(t, transfers, 5)
 //

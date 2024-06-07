@@ -35,6 +35,7 @@ server:
 
 mock:
 	mockgen -package mockdb -destination db/mock/store.go simple-bank/db/sqlc Store
+	mockgen -package mockwk -destination worker/mock/distributor.go simple-bank/worker TaskDistributor
 
 proto:
 #	Generate only gRPC

@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 	"simple-bank/utils"
@@ -19,7 +18,7 @@ func createRandomEntry(t *testing.T) Entry {
 		Amount:    utils.RandomMoney(),
 	}
 
-	testEntry, err := testQueries.CreateEntry(context.Background(), arg)
+	testEntry, err := testStore.CreateEntry(context.Background(), arg)
 	require.NoError(t, err)
 	require.NotEmpty(t, testEntry)
 
@@ -37,7 +36,7 @@ func TestCreateEntry(t *testing.T) {
 
 func TestGetEntry(t *testing.T) {
 	testEntry1 := createRandomEntry(t)
-	testEntry2, err := testQueries.GetEntry(context.Background(), testEntry1.ID)
+	testEntry2, err := testStore.GetEntry(context.Background(), testEntry1.ID)
 	require.NoError(t, err)
 	require.NotEmpty(t, testEntry2)
 
@@ -49,11 +48,11 @@ func TestGetEntry(t *testing.T) {
 
 func TestDeleteEntry(t *testing.T) {
 	testEntry1 := createRandomEntry(t)
-	err := testQueries.DeleteAccount(context.Background(), testEntry1.ID)
+	err := testStore.DeleteAccount(context.Background(), testEntry1.ID)
 	require.NoError(t, err)
 
-	testEntry2, err := testQueries.GetAccount(context.Background(), testEntry1.ID)
+	testEntry2, err := testStore.GetAccount(context.Background(), testEntry1.ID)
 	require.Error(t, err)
-	require.EqualError(t, err, sql.ErrNoRows.Error())
+	require.EqualError(t, err, ErrRecordNotFound.Error())
 	require.Empty(t, testEntry2)
 }

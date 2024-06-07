@@ -1,10 +1,9 @@
 package api
 
 import (
-	"database/sql"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/lib/pq"
 	"github.com/pkg/errors"
 	"net/http"
 	db "simple-bank/db/sqlc"
@@ -49,12 +48,10 @@ func (server *Server) createAccount(ctx *gin.Context) {
 
 	account, err := server.store.CreateAccount(ctx, args)
 	if err != nil {
-		if pqErr, ok := err.(*pq.Error); ok {
-			switch pqErr.Code.Name() {
-			case "foreign_key_violation", "unique_violation":
-				ctx.JSON(http.StatusForbidden, errResponse(err))
-				return
-			}
+		errCode := db.ErrorCode(err)
+		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+			ctx.JSON(http.StatusForbidden, errResponse(err))
+			return
 		}
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
 		return
@@ -95,7 +92,9 @@ func (server *Server) getAccount(ctx *gin.Context) {
 	}
 	account, err := server.store.GetAccount(ctx, uuid.MustParse(req.ID))
 	if err != nil {
-		if err == sql.ErrNoRows {
+		fmt.Println(err)
+		fmt.Println(db.ErrRecordNotFound)
+		if errors.Is(err, db.ErrRecordNotFound) {
 			ctx.JSON(http.StatusNotFound, errResponse(err))
 		}
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
