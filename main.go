@@ -95,7 +95,7 @@ func runTaskProcessor(ctx context.Context, waitGroup *errgroup.Group, config uti
 	log.Info().Msg("start task processor")
 	err := taskProccessor.Start()
 	if err != nil {
-		log.Fatal().Err(err).Msg("failed to start proccessor")
+		log.Fatal().Err(err).Msg("failed to start processor")
 	}
 
 	waitGroup.Go(func() error {
@@ -154,6 +154,8 @@ func runGatewayServer(ctx context.Context, waitGroup *errgroup.Group, config uti
 	if err != nil {
 		log.Fatal().Err(err).Msg("can't create server")
 	}
+
+	// Custom json response
 	jsonOption := runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.JSONPb{
 		MarshalOptions: protojson.MarshalOptions{
 			UseProtoNames: true,

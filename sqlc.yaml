@@ -1,15 +1,21 @@
 version: "2"
 sql:
   - engine: "postgresql"
+    # Where to set up query
     queries: "./db/query/"
+    # Db schema
     schema: "./db/migration/"
     gen:
       go:
         package: "db"
+        # Where sqlc file generated
         out: "db/sqlc"
         sql_package: "pgx/v5"
+        # Add json tags in struct
         emit_json_tags: true
+        # Sqlc gene code which prepare statements
         emit_prepared_queries: false
+        # Gene queries interface in package
         emit_interface: true
         emit_exact_table_names: false
         emit_empty_slices: true
@@ -18,3 +24,6 @@ sql:
             go_type: "time.Time"
           - db_type: "uuid"
             go_type: "github.com/google/uuid.UUID"
+
+
+
